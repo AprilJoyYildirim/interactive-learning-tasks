@@ -2,8 +2,12 @@ resource "aws_s3_bucket" "b" {
     bucket = "aws-s3-devops-task-april"
     acl = "private"
 
+    versioning {
+    enabled = true
+    }
+
     tags = {
-        Name        = "DevOps"
+        Team        = "DevOps"
         Environment = "Dev"
     }
 }
