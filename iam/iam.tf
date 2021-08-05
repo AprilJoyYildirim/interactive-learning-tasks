@@ -1,6 +1,5 @@
 resource "aws_iam_user" "bob" {
   name = "bob"
-
   tags = {
     Teams = "DevOps"
   }
@@ -8,14 +7,15 @@ resource "aws_iam_user" "bob" {
 
 resource "aws_iam_group" "sysusers" {
   name = "sysusers"
+  path = "/users/"
 }
 
-resource "aws_iam_group_membership" "team" {
-  name = "sysusers-membership"
+resource "aws_iam_user_group_membership" "example1" {
+  user = aws_iam_user.bob.name
 
-  users = [
-    aws_iam_user.bob.name,
+  groups = [
+    aws_iam_group.sysusers.name,
+
   ]
-  group = aws_iam_group.sysusers.name
 }
 
